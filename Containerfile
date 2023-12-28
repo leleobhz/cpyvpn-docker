@@ -1,7 +1,9 @@
-FROM docker.io/alpine/git:latest as git
-WORKDIR /
+FROM docker.io/library/debian:stable-slim as git
 ARG BRANCH=main
-RUN git clone --single-branch --depth=1 --branch=${BRANCH} https://gitlab.com/cpvpn/cpyvpn.git
+RUN apt update \
+  && DEBIAN_FRONTEND=noninteractive apt -y --no-install-recommends install git \
+  && echo "Build for branch ${BRANCH}" \
+  && git clone --single-branch --depth=1 --branch=${BRANCH} https://gitlab.com/cpvpn/cpyvpn.git /cpyvpn
 
 FROM docker.io/library/python:3-slim as base
 RUN apt update \

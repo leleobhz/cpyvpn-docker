@@ -15,6 +15,11 @@ jobs:
     name: Build and push to registry
     runs-on: ubuntu-latest
     steps:
+      - name: Install qemu dependency
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qemu-user-static
+
       - name: Clone the repository
         uses: actions/checkout@v3
 
@@ -51,13 +56,14 @@ jobs:
           username: ${{ secrets.QUAY_USER }}
           password: ${{ secrets.QUAY_TOKEN }}
 
-      - name: Build container for UBI - origin branch latest release
+      - name: Build containers
         id: build-dev
         uses: redhat-actions/buildah-build@v2
         with:
           image: cpyvpn
           tags: latest stable ${{ env.cpyvpn_version }}
           layers: true
+          platforms: linux/amd64, linux/arm/v5, linux/arm/v7, linux/arm64/v8
           containerfiles: |
             ./Containerfile
           build-args: |
