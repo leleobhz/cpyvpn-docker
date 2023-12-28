@@ -1,7 +1,7 @@
 FROM docker.io/library/debian:stable-slim as git
 ARG BRANCH=main
 RUN apt update \
-  && DEBIAN_FRONTEND=noninteractive apt -y --no-install-recommends install git \
+  && DEBIAN_FRONTEND=noninteractive apt -y --no-install-recommends install git ca-certificates \
   && echo "Build for branch ${BRANCH}" \
   && git clone --single-branch --depth=1 --branch=${BRANCH} https://gitlab.com/cpvpn/cpyvpn.git /cpyvpn
 
