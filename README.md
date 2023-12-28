@@ -6,11 +6,23 @@
 
 ## Introduction
 
-This container is able to run [cpyvpn](https://gitlab.com/cpvpn/cpyvpn) in a container.
+This container is able to run [cpyvpn](https://gitlab.com/cpvpn/cpyvpn) in a container. This image was designed to be used with vpnc (Inside container) mode, creating a network interface.
 
 ## Requirements
 
 * Run podman as root - vpnc issue
+* Capability NET_ADMIN is also required
+
+## Environment Variables
+
+| Variable | Default value | Required | Description |
+|----------|---------------|----------|-------------|
+| USER | <empty> | Yes | VPN Username |
+| PASSWORD | <empty> | Yes | VPN Password |
+| MODE | l | No | VPN mode |
+| ADDITIONAL_OPTIONS | <empty> | No | Additional command line options to cpyvpn.client |
+| INTERFACE | snxvpn | No | VPN Interface |
+| LOGLEVEL | INFO | No | Log Verbosity |
 
 ## Images Available: 
 
