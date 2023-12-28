@@ -15,7 +15,7 @@ This container is able to run [cpyvpn](https://gitlab.com/cpvpn/cpyvpn) in a con
 ## Images Available: 
 
 | Image | Description | Build periodicity | Archs Available |
-|-------|-------------|-------------------|
+|-------|-------------|-------------------|-----------------|
 | [quay.io/pqatsi/cpyvpn:latest](https://quay.io/repository/pqatsi/cpyvpn/tag/latest) | Latest is tagged to last released numbered version | Daily | linux/amd64 <br /> linux/arm/v5 <br /> linux/arm/v7 <br /> linux/arm64/v8 |
 | [quay.io/pqatsi/cpyvpn:ipsec](https://quay.io/repository/pqatsi/cpyvpn/tag/ipsec) | Ipsec is tagged to last commit on [ipsec branch](https://gitlab.com/cpvpn/cpyvpn/-/tree/ipsec?ref_type=heads) of cpyvpn | Daily | linux/amd64 <br /> linux/arm/v5 <br /> linux/arm/v7 <br /> linux/arm64/v8 |
 
