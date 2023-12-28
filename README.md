@@ -2,7 +2,7 @@
 
 ## Badges
 
-[![Build cpyvpn](https://github.com/leleobhz/cpyvpn-docker/actions/workflows/build-latest.yml/badge.svg)](https://github.com/leleobhz/cpyvpn-docker/actions/workflows/build-latest.yml)
+[![Build cpyvpn](https://github.com/leleobhz/cpyvpn-docker/actions/workflows/build-latest.yml/badge.svg)](https://github.com/leleobhz/cpyvpn-docker/actions/workflows/build-latest.yml) [![Build cpyvpn - ipsec branch](https://github.com/leleobhz/cpyvpn-docker/actions/workflows/build-ipsec.yml/badge.svg)](https://github.com/leleobhz/cpyvpn-docker/actions/workflows/build-ipsec.yml)
 
 ## Introduction
 
