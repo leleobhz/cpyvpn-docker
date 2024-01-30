@@ -29,4 +29,4 @@ ENV ADDITIONAL_OPTIONS=
 ENV LOGLEVEL=INFO
 ENV INTERFACE=snxvpn
 ENTRYPOINT ["/usr/bin/catatonit", "--"]
-CMD /usr/share/vpnc-scripts/vpnc-script | python -m cpyvpn.client ${ADDITIONAL_OPTIONS} --mode ${MODE} --user ${USER} --loglevel ${LOGLEVEL} --interface ${INTERFACE} --script /usr/share/vpnc-scripts/vpnc-script --passwd-on-stdin ${HOST}
+CMD python -m cpyvpn.client ${ADDITIONAL_OPTIONS} --mode ${MODE} --user ${USER} --loglevel ${LOGLEVEL} --interface ${INTERFACE} --script /usr/share/vpnc-scripts/vpnc-script --passwd-script /usr/local/bin/printpass ${HOST}
