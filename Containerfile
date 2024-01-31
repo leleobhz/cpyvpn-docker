@@ -1,7 +1,7 @@
 FROM docker.io/library/python:3-slim as base
 RUN apt update \
   && DEBIAN_FRONTEND=noninteractive apt -y full-upgrade \
-  && DEBIAN_FRONTEND=noninteractive apt -y --no-install-recommends install iproute2 bash procps vpnc catatonit \
+  && DEBIAN_FRONTEND=noninteractive apt -y --no-install-recommends install iproute2 bash procps vpnc catatonit sshpass \
   && apt -y clean autoclean \
   && apt -y autoremove \
   && rm -rf /var/lib/{cache,log}/ /var/lib/apt/lists/*
@@ -29,4 +29,4 @@ ENV ADDITIONAL_OPTIONS=
 ENV LOGLEVEL=INFO
 ENV INTERFACE=snxvpn
 ENTRYPOINT ["/usr/bin/catatonit", "--"]
-CMD python -m cpyvpn.client ${ADDITIONAL_OPTIONS} --mode ${MODE} --user ${USER} --loglevel ${LOGLEVEL} --interface ${INTERFACE} --script /usr/share/vpnc-scripts/vpnc-script --passwd-script /usr/local/bin/printpass ${HOST}
+CMD /usr/local/bin/printpass | sshpass python -m cpyvpn.client ${ADDITIONAL_OPTIONS} --mode ${MODE} --user ${USER} --loglevel ${LOGLEVEL} --interface ${INTERFACE} --script /usr/share/vpnc-scripts/vpnc-script ${HOST}
