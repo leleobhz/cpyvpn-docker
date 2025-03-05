@@ -42,6 +42,8 @@ jobs:
       - name: Podman Socket
         run: |
           podman system service  --time=0 unix:///tmp/podman.sock &
+          mkdir -pv /run/user/1001/podman/
+          ln -sv /tmp/podman.sock /run/user/1001/podman/podman.sock
 
       - name: Fetch trivy
         run: |
@@ -74,9 +76,16 @@ jobs:
           tags: ${{ steps.build-dev.outputs.tags }}
           registry: quay.io/pqatsi
 
-      - name: Run Trivy vulnerability scanner - origin branch latest release
-        run: |
-          podman run --privileged -v /tmp/podman.sock:/var/run/docker.sock -v ./:/data docker.io/aquasec/trivy:latest image --quiet --format sarif --output /data/cpyvpn-latest.sarif --severity CRITICAL,HIGH --vuln-type os,library --ignore-unfixed ${{ steps.build-dev.outputs.image }}
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@0.27.0
+        with:
+          image-ref: '${{ steps.build-dev.outputs.image }}'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+          format: 'sarif'
+          output: container.sarif
+          limit-severities-for-sarif: true
 
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
